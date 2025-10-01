@@ -1,5 +1,6 @@
 ﻿using System.ClientModel;
 using Azure.AI.OpenAI;
+using Demo.Enums;
 using Microsoft.Extensions.AI;
 
 IChatClient client = BuildChatClient(ModelMode.Online);
