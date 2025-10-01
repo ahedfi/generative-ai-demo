@@ -4,6 +4,10 @@ using Microsoft.Extensions.AI;
 
 IChatClient client = BuildChatClient(ModelMode.Online);
 List<ChatMessage> chatHistory = [];
+var chatOptions = new ChatOptions
+{
+    Instructions = "Always speak only French back to the user.",
+};
 
 // Show banner once at start
 Console.ForegroundColor = ConsoleColor.Green;
@@ -12,6 +16,7 @@ Console.WriteLine("         AI Chat Console v1.0     ");
 Console.WriteLine("======================================");
 Console.ResetColor();
 Console.WriteLine("  Type /exit to quit\n");
+
 while (true)
 {
     // === USER PROMPT ===
@@ -43,7 +48,7 @@ while (true)
     var response = string.Empty;
     Console.ForegroundColor = ConsoleColor.Yellow;
 
-    await foreach (var item in client.GetStreamingResponseAsync(chatHistory))
+    await foreach (var item in client.GetStreamingResponseAsync(chatHistory, chatOptions))
     {
         Console.Write(item.Text);
         response += item.Text;
