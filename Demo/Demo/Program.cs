@@ -6,7 +6,7 @@ IChatClient client = BuildChatClient(ModelMode.Online);
 List<ChatMessage> chatHistory = [];
 var chatOptions = new ChatOptions
 {
-   Temperature = 0f,
+   Temperature = 1f,
 };
 
 // Show banner once at start
