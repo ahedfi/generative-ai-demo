@@ -4,6 +4,10 @@ using Microsoft.Extensions.AI;
 
 IChatClient client = BuildChatClient(ModelMode.Online);
 List<ChatMessage> chatHistory = [];
+var chatOptions = new ChatOptions
+{
+   Temperature = 0f,
+};
 
 // Show banner once at start
 Console.ForegroundColor = ConsoleColor.Green;
@@ -44,7 +48,7 @@ while (true)
     var response = string.Empty;
     Console.ForegroundColor = ConsoleColor.Yellow;
 
-    await foreach (var item in client.GetStreamingResponseAsync(chatHistory))
+    await foreach (var item in client.GetStreamingResponseAsync(chatHistory, chatOptions))
     {
         Console.Write(item.Text);
         response += item.Text;
