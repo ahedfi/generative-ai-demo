@@ -2,17 +2,19 @@
 using Azure.AI.OpenAI;
 using Demo.Enums;
 using Microsoft.Extensions.AI;
+using ModelContextProtocol.Client;
 
 IChatClient client = BuildChatClient(ModelMode.Online);
 List<ChatMessage> chatHistory = [];
+
+var mpcTools = await GetMcpToolsFromEShop();
+
 var chatOptions = new ChatOptions
 {
-    Temperature = 1f,
-    //Tools =
-    //[
-    //    AIFunctionFactory.Create(LocalTool.GetCurrentTime),
-    //    AIFunctionFactory.Create(LocalTool.GetWeather),
-    //]
+    Tools =
+    [
+        ..mpcTools
+    ]
 };
 
 // Show banner once at start
@@ -75,11 +77,25 @@ static IChatClient BuildChatClient(ModelMode modelMode)
             var apiKey = new ApiKeyCredential("");
             var deploymentName = "gpt-4o";
             var azureClient = new AzureOpenAIClient(endpoint, apiKey);
-            return azureClient.GetChatClient(deploymentName).AsIChatClient();
+            return azureClient.GetChatClient(deploymentName).AsIChatClient().AsBuilder().UseFunctionInvocation().Build();
         case ModelMode.Offline:
-            return new OllamaChatClient(new Uri("http://localhost:11434/"), "llama3.1:8b");
+            return new OllamaChatClient(new Uri("http://localhost:11434/"), "llama3.1:8b").AsBuilder().UseFunctionInvocation().Build();
         default:
             throw new NotSupportedException($"Model mode {modelMode} is not supported.");
     }
+}
 
+static async Task<IEnumerable<McpClientTool>>  GetMcpToolsFromEShop()
+{
+    var urlToRemoteServer = "http://localhost:5064";
+    var clientTransport = new HttpClientTransport(
+        new HttpClientTransportOptions
+        {
+            Name = "EShopRemoteServer",
+            TransportMode = HttpTransportMode.StreamableHttp,
+            Endpoint = new Uri(urlToRemoteServer),
+        });
+    McpClient mcpClient = await McpClient.CreateAsync(clientTransport);
+
+    return await mcpClient.ListToolsAsync();
 }
