@@ -12,6 +12,7 @@ Console.WriteLine("         AI Chat Console v1.0     ");
 Console.WriteLine("======================================");
 Console.ResetColor();
 Console.WriteLine("  Type /exit to quit\n");
+
 while (true)
 {
     // === USER PROMPT ===
