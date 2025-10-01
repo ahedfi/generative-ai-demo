@@ -1,4 +1,6 @@
-﻿public enum ModelMode
+﻿namespace Demo.Enums;
+
+public enum ModelMode
 {
     Online,
     Offline
