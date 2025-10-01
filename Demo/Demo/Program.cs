@@ -1,12 +1,18 @@
 ﻿using System.ClientModel;
 using Azure.AI.OpenAI;
+using Demo.Enums;
 using Microsoft.Extensions.AI;
 
 IChatClient client = BuildChatClient(ModelMode.Online);
 List<ChatMessage> chatHistory = [];
 var chatOptions = new ChatOptions
 {
-   Temperature = 1f,
+    Temperature = 1f,
+    //Tools =
+    //[
+    //    AIFunctionFactory.Create(LocalTool.GetCurrentTime),
+    //    AIFunctionFactory.Create(LocalTool.GetWeather),
+    //]
 };
 
 // Show banner once at start
@@ -62,10 +68,10 @@ while (true)
 
 static IChatClient BuildChatClient(ModelMode modelMode)
 {
-    switch(modelMode)
+    switch (modelMode)
     {
         case ModelMode.Online:
-            var endpoint = new Uri(""); 
+            var endpoint = new Uri("");
             var apiKey = new ApiKeyCredential("");
             var deploymentName = "gpt-4o";
             var azureClient = new AzureOpenAIClient(endpoint, apiKey);
