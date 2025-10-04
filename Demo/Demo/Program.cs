@@ -4,7 +4,7 @@ using Demo.Enums;
 using Microsoft.Extensions.AI;
 using ModelContextProtocol.Client;
 
-IChatClient client = BuildChatClient(ModelMode.Online);
+IChatClient client = BuildChatClient(ModelMode.Offline);
 List<ChatMessage> chatHistory = [];
 
 var mpcTools = await GetMcpToolsFromEShop();
@@ -20,7 +20,7 @@ var chatOptions = new ChatOptions
 // Show banner once at start
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("======================================");
-Console.WriteLine("         AI Chat Console v1.0     ");
+Console.WriteLine("         AI Chat Console v1.5     ");
 Console.WriteLine("======================================");
 Console.ResetColor();
 Console.WriteLine("  Type /exit to quit\n");
