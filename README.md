@@ -19,10 +19,6 @@ This version demonstrates the use of **System Prompts**, where you can instruct 
 - Maintains conversation history
 - Clean and user-friendly terminal UI
 - Graceful exit with `/exit` command- Streamed AI responses for real-time interaction
-- Online/Offline modes (switch between Azure OpenAI or Ollama locally)
-- Maintains conversation history
-- Clean and user-friendly terminal UI
-- Graceful exit with `/exit` command
 
 ---
 
