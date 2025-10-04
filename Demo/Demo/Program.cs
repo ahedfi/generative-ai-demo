@@ -1,24 +1,25 @@
 ﻿using System.ClientModel;
 using Azure.AI.OpenAI;
 using Demo.Enums;
+using Demo.Tools;
 using Microsoft.Extensions.AI;
 
-IChatClient client = BuildChatClient(ModelMode.Online);
+IChatClient client = BuildChatClient(ModelMode.Offline);
 List<ChatMessage> chatHistory = [];
 var chatOptions = new ChatOptions
 {
     Temperature = 1f,
-    //Tools =
-    //[
-    //    AIFunctionFactory.Create(LocalTool.GetCurrentTime),
-    //    AIFunctionFactory.Create(LocalTool.GetWeather),
-    //]
+    Tools =
+    [
+        AIFunctionFactory.Create(LocalTool.GetCurrentTime),
+        AIFunctionFactory.Create(LocalTool.GetWeather),
+    ]
 };
 
 // Show banner once at start
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("======================================");
-Console.WriteLine("         AI Chat Console v1.0     ");
+Console.WriteLine("         AI Chat Console v1.4     ");
 Console.WriteLine("======================================");
 Console.ResetColor();
 Console.WriteLine("  Type /exit to quit\n");
@@ -75,9 +76,9 @@ static IChatClient BuildChatClient(ModelMode modelMode)
             var apiKey = new ApiKeyCredential("");
             var deploymentName = "gpt-4o";
             var azureClient = new AzureOpenAIClient(endpoint, apiKey);
-            return azureClient.GetChatClient(deploymentName).AsIChatClient();
+            return azureClient.GetChatClient(deploymentName).AsIChatClient().AsBuilder().UseFunctionInvocation().Build();
         case ModelMode.Offline:
-            return new OllamaChatClient(new Uri("http://localhost:11434/"), "llama3.1:8b");
+            return new OllamaChatClient(new Uri("http://localhost:11434/"), "llama3.1:8b").AsBuilder().UseFunctionInvocation().Build();
         default:
             throw new NotSupportedException($"Model mode {modelMode} is not supported.");
     }
