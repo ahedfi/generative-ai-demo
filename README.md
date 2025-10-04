@@ -76,12 +76,12 @@ dotnet run
 
 This repository contains several branches with additional examples:
 
-- [basic-chat-completion](https://github.com/ahedfi/generative-ai-demo/tree/basic-chat-completion)
-- [demonstrate-system-prompts](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-system-prompts)
-- [demonstrate-temperature](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-temperature)
-- [demonstrate-structured-output](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-structured-output)
-- [demonstrate-funcion-calling](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-funcion-calling)
-- [demonstrate-mcp](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-mcp)
+- [0.basic-chat-completion](https://github.com/ahedfi/generative-ai-demo/tree/basic-chat-completion)
+- [1.demonstrate-system-prompts](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-system-prompts)
+- [2.demonstrate-temperature](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-temperature)
+- [3.demonstrate-structured-output](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-structured-output)
+- [4.demonstrate-funcion-calling](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-funcion-calling)
+- [5.demonstrate-mcp](https://github.com/ahedfi/generative-ai-demo/tree/demonstrate-mcp)
 
 
 To explore these examples, simply switch to the desired branch:
