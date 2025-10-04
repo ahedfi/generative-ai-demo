@@ -3,7 +3,7 @@ using Azure.AI.OpenAI;
 using Demo.Enums;
 using Microsoft.Extensions.AI;
 
-IChatClient client = BuildChatClient(ModelMode.Online);
+IChatClient client = BuildChatClient(ModelMode.Offline);
 List<ChatMessage> chatHistory = [];
 
 // Show banner once at start
