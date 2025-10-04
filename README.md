@@ -65,7 +65,7 @@ Run the application:
 
 ```bash
 git clone https://github.com/ahedfi/generative-ai-demo.git
-cd generative-ai-demo
+cd generative-ai-demo/Demo
 dotnet restore
 dotnet run
 ```
